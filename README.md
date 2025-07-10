@@ -45,7 +45,7 @@ Le projet est organisé en 3 étapes progressives :
 - Python 3.8+
 - CUDA (optionnel, pour l'accélération GPU)
 
-### Installation des dépendances
+### Option 1 : Installation avec pip (standard)
 
 ```bash
 # Naviguer vers le dossier du projet
@@ -54,6 +54,57 @@ cd "Renforcement Learning"
 # Installer les dépendances
 pip install -r requirement.txt
 ```
+
+### Option 2 : Installation avec Miniconda (recommandé)
+
+Si vous préférez utiliser un environnement virtuel isolé avec Miniconda :
+
+#### Installation de Miniconda
+
+1. **Télécharger Miniconda** depuis [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html)
+2. **Installer Miniconda** en suivant les instructions pour votre OS
+3. **Redémarrer votre terminal** ou exécuter `conda init`
+
+#### Configuration de l'environnement
+
+```bash
+# Créer un nouvel environnement Python 3.9
+conda create -n dqn-env python=3.9
+
+# Activer l'environnement
+conda activate dqn-env
+
+# Naviguer vers le dossier du projet
+cd "Renforcement Learning"
+
+# Installer les dépendances principales via conda (recommandé)
+conda install pytorch torchvision numpy matplotlib opencv -c pytorch -c conda-forge
+
+# Installer les dépendances restantes via pip
+pip install gymnasium ale-py farama-notifications
+
+# Ou installer toutes les dépendances via pip
+# pip install -r requirement.txt
+```
+
+#### Utilisation quotidienne avec Miniconda
+
+```bash
+# Activer l'environnement à chaque session
+conda activate dqn-env
+
+# Lancer vos scripts
+python run.py
+
+# Désactiver l'environnement quand terminé
+conda deactivate
+```
+
+#### Avantages de Miniconda
+- **Isolation complète** : Aucun conflit avec d'autres projets Python
+- **Gestion simplifiée** : Installation automatique des dépendances système
+- **Performance optimisée** : Versions optimisées des bibliothèques scientifiques
+- **Portabilité** : Facilite le partage et la reproduction de l'environnement
 
 ### Dépendances principales
 - **gymnasium** : Environnements de jeu
@@ -64,6 +115,11 @@ pip install -r requirement.txt
 - **ale-py** : Arcade Learning Environment pour Atari
 
 ## 📚 Utilisation
+
+> **Note** : Si vous utilisez Miniconda, n'oubliez pas d'activer votre environnement avant de lancer les scripts :
+> ```bash
+> conda activate dqn-env
+> ```
 
 ### Step 1 : Frozen Lake (Q-Learning)
 
@@ -181,6 +237,24 @@ DQN/
 1. **Erreur CUDA** : Vérifiez l'installation de PyTorch avec support CUDA
 2. **Environnement manquant** : Installez `ale-py` pour les jeux Atari
 3. **Mémoire insuffisante** : Réduisez `buffer-cap` ou `batch-size`
+4. **Conflits de dépendances** : Utilisez Miniconda pour un environnement isolé
+5. **Erreur "conda command not found"** : Redémarrez votre terminal après l'installation de Miniconda
+
+### Commandes utiles avec Miniconda
+
+```bash
+# Lister tous les environnements
+conda env list
+
+# Supprimer un environnement
+conda env remove -n dqn-env
+
+# Exporter l'environnement pour le partage
+conda env export > environment.yml
+
+# Créer un environnement depuis un fichier
+conda env create -f environment.yml
+```
 
 ### Performance
 
